@@ -19,8 +19,13 @@ app.get("/", (req, res) => {
 });
 
 const authRoutes = require("./routes/authRoute");
+const protect = require("./middleware/authMiddleware");
 
 app.use("/api/auth", authRoutes);
+
+app.get("/api/protected", protect, (req, res) => {
+  res.json({ message: "Protected route accessed", user: req.user });
+});
 
 const PORT = process.env.PORT || 5000;
 
