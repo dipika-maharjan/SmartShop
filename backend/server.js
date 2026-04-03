@@ -20,8 +20,10 @@ app.get("/", (req, res) => {
 
 const authRoutes = require("./routes/authRoute");
 const protect = require("./middleware/authMiddleware");
+const productRoutes = require("./routes/productRoute");
 
 app.use("/api/auth", authRoutes);
+app.use("/api/products", productRoutes);
 
 app.get("/api/protected", protect, (req, res) => {
   res.json({ message: "Protected route accessed", user: req.user });
