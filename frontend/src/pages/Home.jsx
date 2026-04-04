@@ -40,6 +40,31 @@ export default function Home() {
     return `Rs ${numericValue.toLocaleString()}`;
   };
 
+  const handleAddToCart = async (productId) => {
+    if (!token) {
+      return;
+    }
+
+    try {
+      await API.post(
+        "/cart/add",
+        { productId },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      alert("Added to cart");
+    } catch (err) {
+      setError(
+        err.response?.data?.message ||
+          "We could not add this item to cart right now."
+      );
+    }
+  };
+
   return (
     <main className="shop-shell">
       <header className="shop-hero">
@@ -50,6 +75,11 @@ export default function Home() {
         </div>
 
         <div className="shop-actions">
+          {token ? (
+            <Link className="shop-link shop-link--secondary" to="/cart">
+              View cart
+            </Link>
+          ) : null}
           <Link className="shop-link" to={token ? "/dashboard" : "/"}>
             {token ? "Go to dashboard" : "Login"}
           </Link>
@@ -85,7 +115,11 @@ export default function Home() {
                   <p className="product-price">{formatPrice(p.price)}</p>
 
                   {token ? (
-                    <button className="product-btn" type="button">
+                    <button
+                      className="product-btn"
+                      type="button"
+                      onClick={() => handleAddToCart(p._id)}
+                    >
                       Add to Cart
                     </button>
                   ) : (
