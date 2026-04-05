@@ -71,6 +71,10 @@ export default function Cart() {
     }
   };
 
+  const handleCheckout = () => {
+    window.location.href = "/checkout";
+  };
+
   return (
     <main className="cart-shell">
       <section className="cart-hero">
@@ -136,7 +140,11 @@ export default function Cart() {
                   <span>Total</span>
                   <strong>{formatPrice(totalPrice)}</strong>
                 </div>
-                <button className="cart-checkout" type="button">
+                <button
+                  className="cart-checkout"
+                  type="button"
+                  onClick={handleCheckout}
+                >
                   Purchase
                 </button>
               </footer>
