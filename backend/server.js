@@ -22,10 +22,14 @@ const authRoutes = require("./routes/authRoute");
 const protect = require("./middleware/authMiddleware");
 const productRoutes = require("./routes/productRoute");
 const cartRoutes = require("./routes/cartRoute");
+const paymentRoutes = require("./routes/paymentRoute");
+const orderRoutes = require("./routes/orderRoute");
 
 app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/cart", cartRoutes);
+app.use("/api/payment", paymentRoutes);
+app.use("/api/orders", orderRoutes);
 
 app.get("/api/protected", protect, (req, res) => {
   res.json({ message: "Protected route accessed", user: req.user });
