@@ -5,6 +5,8 @@ import Dashboard from "./pages/Dashboard";
 import Home from "./pages/Home";
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
+import Orders from "./pages/Orders";
+import Admin from "./pages/Admin";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
@@ -37,6 +39,15 @@ function App() {
           </ProtectedRoute>
         }
       />
+      <Route
+        path="/orders"
+        element={
+          <ProtectedRoute>
+            <Orders />
+          </ProtectedRoute>
+        }
+      />
+      <Route path="/admin" element={<Admin />} />
     </Routes>
   );
 }
