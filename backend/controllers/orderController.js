@@ -60,4 +60,29 @@ const createOrder = async (req, res) => {
   }
 };
 
-module.exports = { createOrder };
+const getMyOrders = async (req, res) => {
+  try {
+    const orders = await Order.find({ user: req.user })
+      .populate("items.product")
+      .sort({ createdAt: -1 });
+
+    res.json(orders);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+const getAllOrders = async (req, res) => {
+  try {
+    const orders = await Order.find()
+      .populate("items.product")
+      .populate("user", "name email")
+      .sort({ createdAt: -1 });
+
+    res.json(orders);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+module.exports = { createOrder, getMyOrders, getAllOrders };
