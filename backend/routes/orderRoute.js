@@ -5,10 +5,11 @@ const {
 	getAllOrders,
 } = require("../controllers/orderController");
 const protect = require("../middleware/authMiddleware");
+const adminOnly = require("../middleware/adminMiddleware");
 
 const router = express.Router();
 
-router.get("/", getAllOrders);
+router.get("/", protect, adminOnly, getAllOrders);
 router.get("/my", protect, getMyOrders);
 router.post("/", protect, createOrder);
 

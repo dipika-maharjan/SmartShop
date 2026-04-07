@@ -7,11 +7,17 @@ const phonePattern = /^[0-9]{10,15}$/;
 
 const isEmpty = (value) => !value || !String(value).trim();
 
+const signToken = (user) =>
+  jwt.sign({ id: user._id, role: user.role || "user" }, process.env.JWT_SECRET, {
+    expiresIn: "30d",
+  });
+
 const buildUserPayload = (user) => ({
   id: user._id,
   name: user.name,
   email: user.email,
   phone: user.phone,
+  role: user.role || "user",
 });
 
 // Register
@@ -114,7 +120,7 @@ const loginUser = async (req, res) => {
       return res.status(400).json({ message: "Invalid credentials" });
     }
 
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+    const token = jwt.sign({ id: user._id, role: user.role || "user" }, process.env.JWT_SECRET, {
       expiresIn: "30d",
     });
 
@@ -126,5 +132,6 @@ const loginUser = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
 
 module.exports = { registerUser, loginUser };

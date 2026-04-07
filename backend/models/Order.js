@@ -16,6 +16,13 @@ const orderSchema = new mongoose.Schema(
       },
     ],
     totalAmount: Number,
+    subtotalAmount: Number,
+    discountAmount: {
+      type: Number,
+      default: 0,
+    },
+    couponCode: String,
+    paymentIntentId: String,
     paymentStatus: {
       type: String,
       default: "pending",
