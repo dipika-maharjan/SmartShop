@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import API from "../services/api";
+import "./Orders.css";
 
 export default function Orders() {
   const [orders, setOrders] = useState([]);
@@ -37,47 +38,48 @@ export default function Orders() {
 
   if (loading) {
     return (
-      <div className="auth-shell">
-        <section className="auth-card">
+      <main className="orders-shell">
+        <section className="orders-card">
           <h2>My Orders</h2>
           <p>Loading your orders...</p>
         </section>
-      </div>
+      </main>
     );
   }
 
   return (
-    <div className="auth-shell">
-      <section className="auth-card" style={{ maxWidth: "800px" }}>
-        <h2>My Orders</h2>
+    <main className="orders-shell">
+      <section className="orders-card">
+        <header className="orders-head">
+          <span className="orders-badge">Purchases</span>
+          <h2>My Orders</h2>
+          <p>Track all your completed payments and item summaries.</p>
+        </header>
 
-        {error && <p style={{ color: "#dc2626" }}>{error}</p>}
+        {error && <p className="orders-error">{error}</p>}
 
-        {!error && orders.length === 0 && <p>You have no orders yet.</p>}
+        {!error && orders.length === 0 && <p className="orders-empty">You have no orders yet.</p>}
 
         {orders.map((order) => (
-          <div
-            key={order._id}
-            style={{
-              border: "1px solid #e5e7eb",
-              borderRadius: "12px",
-              padding: "12px",
-              marginTop: "12px",
-            }}
-          >
-            <h3 style={{ margin: "0 0 8px" }}>Order ID: {order._id}</h3>
-            <p style={{ margin: "0 0 8px" }}>Total: Rs {order.totalAmount}</p>
+          <article key={order._id} className="orders-item-card">
+            <div className="orders-item-head">
+              <h3>Order ID: {order._id}</h3>
+              <strong>Rs {Number(order.totalAmount || 0).toLocaleString()}</strong>
+            </div>
+            <p className="orders-item-date">
+              {order?.createdAt ? new Date(order.createdAt).toLocaleString() : "Date unavailable"}
+            </p>
 
-            {(order.items || []).map((item, index) => (
-              <div key={`${order._id}-${item?.product?._id || index}`}>
-                <p style={{ margin: "0 0 6px" }}>
+            <div className="orders-item-list">
+              {(order.items || []).map((item, index) => (
+                <p key={`${order._id}-${item?.product?._id || index}`}>
                   {item?.product?.title || "Product removed"} (x{item.quantity})
                 </p>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          </article>
         ))}
       </section>
-    </div>
+    </main>
   );
 }
