@@ -72,9 +72,16 @@ export default function Register() {
           <p>Create your account to browse products, place orders, and manage your profile.</p>
         </div>
 
+        <div className="auth-copy">
+          <p className="auth-copy-title">Fast setup</p>
+          <p className="auth-copy-text">
+            One account for shopping, coupons, wishlist, invoices, and your order history.
+          </p>
+        </div>
+
         <form className="auth-form" onSubmit={handleSubmit}>
-          <label>
-            Full name
+          <label className="auth-field">
+            <span>Full name</span>
             <input
               type="text"
               name="name"
@@ -85,8 +92,8 @@ export default function Register() {
             />
           </label>
 
-          <label>
-            Email
+          <label className="auth-field">
+            <span>Email address</span>
             <input
               type="email"
               name="email"
@@ -97,8 +104,8 @@ export default function Register() {
             />
           </label>
 
-          <label>
-            Phone number
+          <label className="auth-field">
+            <span>Phone number</span>
             <input
               type="tel"
               name="phone"
@@ -109,33 +116,35 @@ export default function Register() {
             />
           </label>
 
-          <label>
-            Password
-            <input
-              type="password"
-              name="password"
-              placeholder="Create a password"
-              value={form.password}
-              onChange={handleChange}
-              autoComplete="new-password"
-            />
-          </label>
+          <div className="auth-grid-two">
+            <label className="auth-field">
+              <span>Password</span>
+              <input
+                type="password"
+                name="password"
+                placeholder="Create a password"
+                value={form.password}
+                onChange={handleChange}
+                autoComplete="new-password"
+              />
+            </label>
 
-          <label>
-            Confirm password
-            <input
-              type="password"
-              name="confirmPassword"
-              placeholder="Confirm your password"
-              value={form.confirmPassword}
-              onChange={handleChange}
-              autoComplete="new-password"
-            />
-          </label>
+            <label className="auth-field">
+              <span>Confirm password</span>
+              <input
+                type="password"
+                name="confirmPassword"
+                placeholder="Confirm password"
+                value={form.confirmPassword}
+                onChange={handleChange}
+                autoComplete="new-password"
+              />
+            </label>
+          </div>
 
           {error ? <p className="auth-error">{error}</p> : null}
 
-          <button type="submit" disabled={loading}>
+          <button className="auth-primary-btn" type="submit" disabled={loading}>
             {loading ? "Creating account..." : "Register"}
           </button>
         </form>

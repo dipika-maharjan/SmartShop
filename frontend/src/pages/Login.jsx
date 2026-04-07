@@ -35,8 +35,9 @@ export default function Login() {
       const res = await API.post("/auth/login", form);
 
       localStorage.setItem("token", res.data.token);
+      localStorage.setItem("user", JSON.stringify(res.data.user || {}));
       setForm({ email: "", password: "" });
-      navigate("/dashboard");
+      navigate(res.data?.user?.role === "admin" ? "/admin" : "/dashboard");
     } catch (err) {
       setError(
         err.response?.data?.message || "Unable to login. Please try again."
@@ -52,12 +53,19 @@ export default function Login() {
         <div className="auth-brand">
           <span className="auth-badge">SmartShop</span>
           <h2>Welcome back</h2>
-          <p>Sign in to continue shopping, managing orders, and tracking your activity.</p>
+          <p>Sign in to continue shopping, tracking orders, and managing your account.</p>
+        </div>
+
+        <div className="auth-copy">
+          <p className="auth-copy-title">Secure access</p>
+          <p className="auth-copy-text">
+            Use your email and password to access your dashboard, cart, orders, and invoice history.
+          </p>
         </div>
 
         <form className="auth-form" onSubmit={handleLogin}>
-          <label>
-            Email
+          <label className="auth-field">
+            <span>Email address</span>
             <input
               type="email"
               name="email"
@@ -68,8 +76,8 @@ export default function Login() {
             />
           </label>
 
-          <label>
-            Password
+          <label className="auth-field">
+            <span>Password</span>
             <input
               type="password"
               name="password"
@@ -82,7 +90,7 @@ export default function Login() {
 
           {error ? <p className="auth-error">{error}</p> : null}
 
-          <button type="submit" disabled={loading}>
+          <button className="auth-primary-btn" type="submit" disabled={loading}>
             {loading ? "Signing in..." : "Login"}
           </button>
         </form>

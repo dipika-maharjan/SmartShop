@@ -7,47 +7,45 @@ import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
 import Orders from "./pages/Orders";
 import Admin from "./pages/Admin";
+import Wishlist from "./pages/Wishlist";
+import Profile from "./pages/Profile";
+import Invoice from "./pages/Invoice";
 import ProtectedRoute from "./components/ProtectedRoute";
+import AdminRoute from "./components/AdminRoute";
+import UserLayout from "./components/UserLayout";
+import "./ui.css";
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<Login />} />
       <Route path="/register" element={<Register />} />
+
       <Route
-        path="/dashboard"
         element={
           <ProtectedRoute>
-            <Dashboard />
+            <UserLayout />
           </ProtectedRoute>
         }
-      />
-      <Route path="/home" element={<Home />} />
+      >
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/checkout" element={<Checkout />} />
+        <Route path="/orders" element={<Orders />} />
+        <Route path="/wishlist" element={<Wishlist />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/invoice" element={<Invoice />} />
+      </Route>
+
       <Route
-        path="/cart"
+        path="/admin"
         element={
-          <ProtectedRoute>
-            <Cart />
-          </ProtectedRoute>
+          <AdminRoute>
+            <Admin />
+          </AdminRoute>
         }
       />
-      <Route
-        path="/checkout"
-        element={
-          <ProtectedRoute>
-            <Checkout />
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/orders"
-        element={
-          <ProtectedRoute>
-            <Orders />
-          </ProtectedRoute>
-        }
-      />
-      <Route path="/admin" element={<Admin />} />
     </Routes>
   );
 }

@@ -79,6 +79,86 @@
   color: #b91c1c;
 }
 
+.shop-filters {
+  margin-bottom: 14px;
+  background: rgba(255, 255, 255, 0.84);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 18px;
+  padding: 14px;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
+}
+
+.shop-filters-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.shop-filters-head h2 {
+  margin: 0;
+  font-size: 18px;
+  color: #0f172a;
+}
+
+.shop-clear-btn {
+  border: 1px solid #d8e0e8;
+  background: #fff;
+  color: #1d4ed8;
+  border-radius: 12px;
+  padding: 8px 12px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.shop-clear-btn:hover {
+  border-color: #1d4ed8;
+}
+
+.shop-filters-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.shop-filter-field {
+  display: grid;
+  gap: 6px;
+}
+
+.shop-filter-field span {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #475569;
+}
+
+.shop-filter-field input,
+.shop-filter-field select {
+  width: 100%;
+  border: 1px solid #d8e0e8;
+  border-radius: 12px;
+  padding: 10px 12px;
+  font: inherit;
+  background: #fff;
+  color: #0f172a;
+}
+
+.shop-filter-field input:focus,
+.shop-filter-field select:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+.shop-filter-field--search {
+  grid-column: span 2;
+}
+
 .product-grid {
   margin-top: 18px;
   display: grid;
@@ -155,9 +235,27 @@
   color: #1d4ed8;
 }
 
+.product-btn--wishlist {
+  background: linear-gradient(135deg, #ecfeff, #f0fdf4);
+  border: 1px solid #9ae6b4;
+  color: #065f46;
+}
+
+.product-btn--wishlist:hover {
+  border-color: #34d399;
+}
+
 @media (max-width: 980px) {
   .product-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .shop-filters-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .shop-filter-field--search {
+    grid-column: span 2;
   }
 }
 
@@ -173,5 +271,18 @@
 
   .product-grid {
     grid-template-columns: 1fr;
+  }
+
+  .shop-filters-head {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .shop-filters-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .shop-filter-field--search {
+    grid-column: auto;
   }
 }

@@ -115,6 +115,15 @@
   margin-bottom: 24px;
 }
 
+.checkout-total--subtle {
+  margin-bottom: 10px;
+}
+
+.checkout-total--subtle strong {
+  color: #166534;
+  font-size: 18px;
+}
+
 .checkout-total span {
   font-size: 16px;
   color: var(--auth-muted);
@@ -127,6 +136,28 @@
 
 .checkout-actions {
   text-align: center;
+}
+
+.checkout-coupon-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.checkout-coupon-row input {
+  border: 1px solid #d8e0e8;
+  border-radius: 12px;
+  padding: 11px 12px;
+  font: inherit;
+}
+
+.checkout-card-input {
+  border: 1px solid #d8e0e8;
+  border-radius: 12px;
+  padding: 12px 14px;
+  background: #fff;
+  margin-bottom: 12px;
 }
 
 .checkout-btn {
@@ -152,6 +183,14 @@
 .checkout-btn:disabled {
   opacity: 0.72;
   cursor: not-allowed;
+}
+
+.checkout-btn--secondary {
+  margin-bottom: 0;
+  background: #fff;
+  color: #1d4ed8;
+  border: 1px solid #d8e0e8;
+  box-shadow: none;
 }
 
 .checkout-info {
